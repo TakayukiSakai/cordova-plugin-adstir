@@ -10,7 +10,7 @@ As of today, only banner ad (320x50) is supported.
 ## Installation
 
 ```
-cordova plugin add com.effers.kaky.adstir
+cordova plugin add https://github.com/TakayukiSakai/cordova-plugin-adstir.git
 ```
 
 ## Getting Started
