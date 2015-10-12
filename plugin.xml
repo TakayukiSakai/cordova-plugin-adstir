@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.effers.kaky.adstir" version="0.1.0">
+    <name>AdStir</name>
+    <description>Cordova AdStir Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,adstir,ad</keywords>
+    <js-module src="www/adstir.js" name="AdStir">
+        <clobbers target="AdStir" />
+    </js-module>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AdStir">
+                <param name="ios-package" value="CDVAdStir"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CDVAdStir.h" />
+        <source-file src="src/ios/CDVAdStir.m" />
+
+        <framework src="src/ios/AdStir/AdstirAds.framework" custom="true" />
+
+        <framework src="AdSupport.framework"/>
+        <framework src="Security.framework"/>
+        <framework src="ImageIO.framework"/>
+    </platform>
+</plugin>
