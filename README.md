@@ -1,7 +1,7 @@
-# cordova-plugin-nend
+# cordova-plugin-adstir
 
 This is a cordova plugin, which provides a way to request AdStir ads natively from JavaScript.
-As of today, only banner ad (320x50) is supported.
+As of today, only banner ad is supported.
 
 ## Supported Platforms (and SDK version)
 
