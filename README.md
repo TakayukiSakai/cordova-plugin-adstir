@@ -19,8 +19,10 @@ cordova plugin add https://github.com/TakayukiSakai/cordova-plugin-adstir.git
 var options = {};
 options.bannerMediaId = "YOUR_MEDIA_ID";
 options.bannerSpotId = YOUR_SPOT_ID;
-options.bannerIntervalTime = 60; // refresh interval
-options.bannerBackgroundColor = "0x6096C3"; // background color for banner view
+options.bannerWidth = 300; // optional (default: 320)
+options.bannerHeight = 250; // optional (default: 50)
+options.bannerIntervalTime = 60; // refresh interval (default: 60)
+options.bannerBackgroundColor = "0x6096C3"; // background color for banner view (default: "0xFFFFFF")
 
 AdStir.setOptions(options); // If you don't call this function, a key and an id for testing will be used instead.
 AdStir.createBanner(); // Being invoked in "deviceready" event might be good.

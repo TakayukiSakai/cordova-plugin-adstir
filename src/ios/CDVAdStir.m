@@ -19,15 +19,28 @@
 
     NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
 
+    int bannerWidth = [[options objectForKey:@"bannerWidth"] intValue];
+    int bannerHeight = [[options objectForKey:@"bannerHeight"] intValue];
+
+    AdstirAdSize adstirAdSize;
+    if (bannerWidth == 320 && bannerHeight == 50) adstirAdSize = kAdstirAdSize320x50;
+    else if (bannerWidth == 320 && bannerHeight == 100) adstirAdSize = kAdstirAdSize320x100;
+    else if (bannerWidth == 300 && bannerHeight == 250) adstirAdSize = kAdstirAdSize300x250;
+    else if (bannerWidth == 728 && bannerHeight == 90) adstirAdSize = kAdstirAdSize728x90;
+    else {
+        NSLog(@"Error: Specified banner ad size is not supported.");
+        return;
+    }
+
     CGRect sf = self.webView.superview.bounds;
 
-    int originX = (sf.size.width - 320) / 2;
-    int originY = sf.size.height - 50;
+    int originX = (sf.size.width - bannerWidth) / 2;
+    int originY = sf.size.height - bannerHeight;
 
     NSLog(@"Media ID: %@", [options objectForKey:@"bannerMediaId"]);
     NSLog(@"Spot ID: %d", [[options objectForKey:@"bannerSpotId"] intValue]);
 
-    AdstirMraidView *aAdstir = [[AdstirMraidView alloc] initWithAdSize:kAdstirAdSize320x50 origin:CGPointMake(originX, 0)
+    AdstirMraidView *aAdstir = [[AdstirMraidView alloc] initWithAdSize:adstirAdSize origin:CGPointMake(originX, 0)
         media:[options objectForKey:@"bannerMediaId"] spot:[[options objectForKey:@"bannerSpotId"] intValue]];
     aAdstir.intervalTime = [[options objectForKey:@"bannerIntervalTime"] intValue];
 
