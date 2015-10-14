@@ -3,14 +3,14 @@ var adStirExport = {};
 var options = {};
 
 var defaultOptions = {
-  bannerMediaId: "aa",
-  bannerSpotId: 0,
+  bannerMediaId: "MEDIA-be5613e3",
+  bannerSpotId: 1,
   bannerWidth: 320,
   bannerHeight: 50,
   bannerIntervalTime: 60,
   bannerBackgroundColor: "0xFFFFFF",
-  interstitialApiKey: "308c2499c75c4a192f03c02b2fcebd16dcb45cc9",
-  interstitialSpotId: "213208"
+  interstitialMediaId: "MEDIA-be5613e3",
+  interstitialSpotId: 2
 };
 
 adStirExport.setOptions = function(args) {

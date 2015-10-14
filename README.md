@@ -15,6 +15,8 @@ cordova plugin add https://github.com/TakayukiSakai/cordova-plugin-adstir.git
 
 ## Getting Started
 
+### Banner Ad
+
 ```javascript
 var options = {};
 options.bannerMediaId = "YOUR_MEDIA_ID";
@@ -32,4 +34,18 @@ AdStir.showBanner();
 
 // if you wanna hide existing banner
 AdStir.hideBanner();
+```
+
+### Interstitial Ad
+
+```javascript
+var options = {};
+options.interstitialMediaId = "YOUR_MEDIA_ID";
+options.interstitialSpotId = YOUR_SPOT_ID;
+
+AdStir.setOptions(options); // If you don't call this function, a key and an id for testing will be used instead.
+AdStir.createInterstitial(); // Being invoked in "deviceready" event might be good.
+
+// ...later
+AdStir.showInterstitial();
 ```

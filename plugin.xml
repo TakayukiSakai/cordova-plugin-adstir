@@ -21,6 +21,8 @@
         <source-file src="src/ios/CDVAdStir.m" />
 
         <framework src="src/ios/AdStir/AdstirAds.framework" custom="true" />
+        <header-file src="src/ios/AdStir/Interstitial/AdstirInterstitial.h" />
+        <source-file src="src/ios/AdStir/Interstitial/libAdstirAds-Interstitial.a" framework="true" />
 
         <framework src="AdSupport.framework"/>
         <framework src="Security.framework"/>

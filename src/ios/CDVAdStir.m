@@ -1,11 +1,13 @@
 #import "CDVAdStir.h"
 #import <AdstirAds/AdstirAds.h>
+#import "AdstirInterstitial.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface CDVAdStir ()
 
 @property (strong) UIView *bannerView;
+@property (strong) AdstirInterstitial *inter;
 
 @end
 
@@ -91,52 +93,34 @@
 }
 
 
-// - (void)createInterstitial:(CDVInvokedUrlCommand *)command {
-//     NSLog(@"createInterstitial");
+ - (void)createInterstitial:(CDVInvokedUrlCommand *)command {
+    NSLog(@"createInterstitial");
 
-//     CDVPluginResult *pluginResult;
-//     NSString *callbackId = command.callbackId;
+    CDVPluginResult *pluginResult;
+    NSString *callbackId = command.callbackId;
 
-//     NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
+    NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
 
-//     [[NADInterstitial sharedInstance] loadAdWithApiKey:[options objectForKey:@"interstitialApiKey"]
-//                                                 spotId:[options objectForKey:@"interstitialSpotId"]];
+    self.inter = [[AdstirInterstitial alloc] init];
+    self.inter.media = [options objectForKey:@"interstitialMediaId"];
+    self.inter.spot = [[options objectForKey:@"interstitialSpotId"] intValue];
+    [self.inter load];
 
-//     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-//     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-// }
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
 
-// - (void)showInterstitial:(CDVInvokedUrlCommand *)command {
-//     NSLog(@"showInterstitial");
+- (void)showInterstitial:(CDVInvokedUrlCommand *)command {
+    NSLog(@"showInterstitial");
 
-//     CDVPluginResult *pluginResult;
-//     NSString *callbackId = command.callbackId;
+    CDVPluginResult *pluginResult;
+    NSString *callbackId = command.callbackId;
 
-//     NADInterstitialShowResult result = [[NADInterstitial sharedInstance] showAd];
-//     switch ( result )
-//     {
-//         case AD_SHOW_SUCCESS:
-//             NSLog(@"広告の表示に成功しました。");
-//             break;
-//         case AD_SHOW_ALREADY:
-//             NSLog(@"既に広告が表示されています。");
-//             break;
-//         case AD_FREQUENCY_NOT_REACHABLE:
-//             NSLog(@"広告のフリークエンシーカウントに達していません。");
-//             break;
-//         case AD_LOAD_INCOMPLETE:
-//             NSLog(@"抽選リクエストが実行されていない、もしくは実行中です。");
-//             break;
-//         case AD_REQUEST_INCOMPLETE:
-//             NSLog(@"抽選リクエストに失敗しています。");
-//             break;
-//         case AD_DOWNLOAD_INCOMPLETE:
-//             NSLog(@"広告のダウンロードが完了していません。");
-//             break;
-//     }
+    UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [self.inter showTypeA:rootViewController];
 
-//     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-//     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-// }
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
 
 @end
